@@ -1,25 +1,25 @@
-import logging
+# import logging
 
-from opencensus.ext.azure.log_exporter import AzureLogHandler
-from opencensus.ext.azure.trace_exporter import AzureExporter
-from opencensus.trace import config_integration
-from opencensus.trace.samplers import ProbabilitySampler
-from opencensus.trace.tracer import Tracer
+# from opencensus.ext.azure.log_exporter import AzureLogHandler
+# from opencensus.ext.azure.trace_exporter import AzureExporter
+# from opencensus.trace import config_integration
+# from opencensus.trace.samplers import ProbabilitySampler
+# from opencensus.trace.tracer import Tracer
 
-config_integration.trace_integrations(['logging'])
+# config_integration.trace_integrations(['logging'])
 
-logger = logging.getLogger(__name__)
+# logger = logging.getLogger(__name__)
 
-handler = AzureLogHandler(connection_string='InstrumentationKey=5e72fa56-3a39-455a-8b86-04bd5c68bb98;IngestionEndpoint=https://northeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://northeurope.livediagnostics.monitor.azure.com/')
-handler.setFormatter(logging.Formatter('%(asctime)s %(traceId)s %(spanId)s %(message)s'))
-logger.addHandler(handler)
+# handler = AzureLogHandler(connection_string='<Your Connection String>')
+# handler.setFormatter(logging.Formatter('%(asctime)s %(traceId)s %(spanId)s %(message)s'))
+# logger.addHandler(handler)
 
-tracer = Tracer(
-    exporter=AzureExporter(connection_string='InstrumentationKey=5e72fa56-3a39-455a-8b86-04bd5c68bb98;IngestionEndpoint=https://northeurope-2.in.applicationinsights.azure.com/;LiveEndpoint=https://northeurope.livediagnostics.monitor.azure.com/'),
-    sampler=ProbabilitySampler(1.0)
-)
+# tracer = Tracer(
+#     exporter=AzureExporter(connection_string='<Your Connection String>'),
+#     sampler=ProbabilitySampler(1.0)
+# )
 
-logger.warning('Before the span')
-with tracer.span(name='Hello'):
-    logger.warning('In the span')
-logger.warning('After the span')
+# logger.warning('Before the span')
+# with tracer.span(name='Hello'):
+#     logger.warning('In the span')
+# logger.warning('After the span')
